@@ -32,6 +32,10 @@
             function (response) {
               alert("Email envoyé avec succès !");
               console.log("SUCCESS!", response.status, response.text);
+            
+               // Redirection vers lastpage.html
+               window.location.href = "lastpage.html";
+              
             },
             function (error) {
               alert("Erreur lors de l'envoi de l'email.");
