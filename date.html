@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date</title>
+    <link rel="stylesheet" href="css/date.css" />
+    <!-- Intégration du SDK EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      // Initialisation d'EmailJS avec votre User ID
+      (function () {
+        emailjs.init("PNGmtzZvCJSDunUkj"); // Remplacez par votre User ID
+      })();
+
+      // Fonction pour envoyer l'email
+      function sendEmail(event) {
+        event.preventDefault(); // Empêche la soumission du formulaire
+
+        // Récupère la date choisie
+        const selectedDate = document.querySelector('input[type="date"]').value;
+
+        // Paramètres de l'email
+        const templateParams = {
+          date: selectedDate,
+        };
+
+        // Envoi de l'email
+        emailjs
+          .send("service_jb0c4d2", "template_veopz25", templateParams) // Remplacez par vos IDs
+          .then(
+            function (response) {
+              alert("Email envoyé avec succès !");
+              console.log("SUCCESS!", response.status, response.text);
+            },
+            function (error) {
+              alert("Erreur lors de l'envoi de l'email.");
+              console.log("FAILED...", error);
+            }
+          );
+      }
+    </script>
+  </head>
+  <body>
+    <h1 title="choose a date">J'ai quelque chose pour toi ...</h1>
+    <form class="form-group" onsubmit="sendEmail(event)">
+      <label>Quelle date: (choisis une date)</label>
+      <div>
+        <input type="date" required />
+        <button class="button" type="submit">Envoyer</button>
+      </div>
+    </form>
+  </body>
+</html>
